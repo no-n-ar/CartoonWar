@@ -13,12 +13,21 @@ import com.constant.Constant;
 import com.util.GetImageUtil;
 import com.util.singlePlay;
 
+/**
+* @ClassName: Bullet
+* @Description: 子弹
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:35:44
+*
+*/
 public class Bullet extends Gameobj implements ActionAble{
-	//创建单次播放音乐的对象
+	
+	// 创建单次播放音乐的对象
 	singlePlay singleplay = new singlePlay();
 	private int speed;
 	public GameClient gc;
-	//子弹类型
+	
+	// 子弹类型
 	public boolean IsGood;
     public Bullet() {
     	
@@ -28,7 +37,7 @@ public class Bullet extends Gameobj implements ActionAble{
     	this.y = y;
     	this.img = GetImageUtil.getImg(imgName);
     	this.gc = gc;
-    	this.speed = 50;
+    	this.speed = 45;
     	this.IsGood = IsGood;
     }
 	@Override
@@ -63,6 +72,9 @@ public class Bullet extends Gameobj implements ActionAble{
 				if(mouse.blood==0) {
 					//销毁自身
 					gc.mouses.remove(mouse);
+					// 重生
+					//Mouse mouse1 = new Mouse(100,100,"com/img/Plane.png",gc,true);
+//					gc.mouses.add(mouse);
 				}
 				//移除子弹
 				gc.bullets.remove(this);

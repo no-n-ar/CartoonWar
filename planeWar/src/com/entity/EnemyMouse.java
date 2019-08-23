@@ -9,6 +9,13 @@ import com.action.ActionAble;
 import com.client.GameClient;
 import com.util.GetImageUtil;
 
+/**
+* @ClassName: EnemyMouse
+* @Description: 敌方单位
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:35:57
+*
+*/
 public class EnemyMouse extends Mouse implements ActionAble{
     private Integer enemyType;
     private GameClient gc;
@@ -38,7 +45,9 @@ public class EnemyMouse extends Mouse implements ActionAble{
     public void move() {
     	x -= speed;
     }
+    
     int count = 0;
+    
     public void draw(Graphics g) {
     	if(count>6) {
     		count = 0;
@@ -50,11 +59,13 @@ public class EnemyMouse extends Mouse implements ActionAble{
        }
     }
     Random random = new Random();
+    
     //敌人发火
     public void fire() {
     	Bullet bullet = new Bullet(x,y+imgs1[0].getHeight(null)/2,"com/img/eBullet/enemy.png",gc,false);
     	gc.bullets.add(bullet);
     }
+    
     //获取到敌人的矩形
   	public Rectangle getRec() {
   		return new Rectangle(x,y,this.imgs1[0].getWidth(null),this.imgs1[0].getHeight(null));

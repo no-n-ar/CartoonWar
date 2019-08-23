@@ -26,34 +26,41 @@ import com.entity.Prop;
 import com.util.GetImageUtil;
 import com.util.SoundPlayer;
 
+/**
+* @ClassName: GameClient
+* @Description: 客户端
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:37:54
+*
+*/
 public class GameClient extends Frame{
-	//创建一个mouse出来     
-	Mouse mouse = new Mouse(100,200,"com/img/Plane.png",this,true);
-	//创建一个子弹出来
-//	Bullet bullet = new Bullet(500, 200, "com/img/bullet/bullet.png");
-	//创建一个子弹集合
+	// 创建一个mouse出来     
+	Mouse mouse = new Mouse(100,200,"com/img/Plane.png",this,true);  
+	// 创建一个子弹出来
+	//	Bullet bullet = new Bullet(500, 200, "com/img/bullet/bullet.png");
+	// 创建一个子弹集合
 	public List<Bullet> bullets = new ArrayList();
-	//创建一个我方的集合
+	// 创建一个我方的集合
 	public List<Mouse> mouses = new ArrayList<>();
-	//创建一个敌军一号
+	// 创建一个敌军一号
 	EnemyMouse enemy1 = new EnemyMouse(900,250,1,this,false);
-	//创建敌军二号
+	// 创建敌军二号
 	EnemyMouse enemy2 = new EnemyMouse(850,450,1,this,false);
-	//创建敌军三号
+	// 创建敌军三号
 	EnemyMouse enemy3 = new EnemyMouse(650,200,1,this,false);
-	//创建敌军四号
+	// 创建敌军四号
 	EnemyMouse enemy4 = new EnemyMouse(650,550,1,this,false);
-	//创建一个敌军集合
+	// 创建一个敌军集合
 	public List<Mouse> enemys = new ArrayList<>();
-	//创建一个爆炸的集合
+	// 创建一个爆炸的集合
 	public List<Boom> booms = new ArrayList<>();
-	//创建背景图片
-	BackGround background = new BackGround(0,0,"com/img/bj.jpg");
-	//创建一个工具集合
+	// 创建背景图片
+	BackGround background = new BackGround(0,0,"com/img/bg01.png");
+	// 创建一个工具集合
 	public List<Prop> props = new ArrayList<>();
-	//创建一个boos集合
+	// 创建一个boos集合
 	public List<Mouse> booss = new ArrayList<>(); 
-	//解决图片闪烁的方法
+	// 解决图片闪烁的方法
 	public void update(Graphics g) {
 		Image backImg = createImage(Constant.GAMEWIDTH, Constant.GAMEHEIGHT);
 		Graphics backg = backImg.getGraphics();
@@ -64,35 +71,35 @@ public class GameClient extends Frame{
 		paint(backg);
 		g.drawImage(backImg,0,0,null);
 	}
-    //生成窗口的方法
+	// 生成窗口的方法
 	public void lanuchFrame() {
 		SoundPlayer soundPlayer = new SoundPlayer("com/sound/11.mp3");
 		soundPlayer.start();
 		this.setSize(Constant.GAMEWIDTH,Constant.GAMEHEIGHT);
 		this.setTitle("飞机大作战");
 		this.setVisible(true);
-		//不能最大化
+		// 不能最大化
 		this.setResizable(false);
-		
-		//界面居中
+
+		// 界面居中
 		this.setLocationRelativeTo(null);
 		Image img = GetImageUtil.getImg("com/img/icon/cartoonIcon.png");
 		this.setIconImage(img);
-		
-		//关闭窗口
+
+		// 关闭窗口
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		
-		//添加鼠标监听
+
+		// 添加鼠标监听
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		
-		//添加键盘监听
+
+		// 添加键盘监听
 		this.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				mouse.keyPressed(e);
@@ -103,96 +110,106 @@ public class GameClient extends Frame{
 		});	
 		new Thread1().start();
 		mouses.add(mouse);
-		
-		//敌人集合中加入
+
+		// 敌人集合中加入
 		enemys.add(enemy1);
 		enemys.add(enemy2);
 		enemys.add(enemy3);
 		enemys.add(enemy4);
 		booss.add(new Boos(1100,400,this,false));
-		
+
+
 		Timer timer= new Timer();
-		  int internumber=10;
-		  timer.schedule(new TimerTask() {
-		   public void run() {
-		    flyEnterdIndex();
-		   }
-		   
-		  }
-		  ,internumber,internumber);
-		 }
-		  int flyEnterdIndex = 0;
-		  public void flyEnterdIndex() {
-		   flyEnterdIndex++;
-		   if(flyEnterdIndex%300==0) {
-		    Random random=new Random();
-		    int x=random.nextInt(300)+1100;
-		    int y=random.nextInt(600)-50;
-		    
-		    enemys.add(new EnemyMouse(x,y,1,this,false));
-		    if(flyEnterdIndex%1000==0) {
-			    //Random random=new Random();
-			    //int x=random.nextInt(300)+1100;
-			    //int y=random.nextInt(600)-50;
-			    booss.add(new Boos(x,y,this,false));
-		   }
-		   } 
-		
-		
+		int internumber=10;
+		timer.schedule(new TimerTask() {
+			public void run() {
+				flyEnterdIndex();
+			}
+
+		}
+		,internumber,internumber);
 	}
-	//重写print()
+
+	int flyEnterdIndex = 0;
+	public void flyEnterdIndex() {
+		flyEnterdIndex++;
+		if(flyEnterdIndex%250==0) {
+			Random random=new Random();
+			int x=random.nextInt(300)+1300;
+			int y=random.nextInt(610)+50;
+
+			enemys.add(new EnemyMouse(x,y,1,this,false));
+			if(flyEnterdIndex%350==0) {
+				//Random random=new Random();
+				//int x=random.nextInt(300)+1100;
+				//int y=random.nextInt(600)-50;
+				booss.add(new Boos(x,y,this,false));
+			}
+		} 
+	}
+
+	// 重写print()
 	public void paint(Graphics g) {
 		background.draw(g);
 		g.drawLine(1200, 0, 1200, 800);
-		
+
 		for(int i = 0;i<mouses.size();i++) {
 			mouses.get(i).draw(g);
 			mouses.get(i).containItem(props);
 		}
-		
-		//循环画子弹
-        for(int i = 0;i<bullets.size();i++) {
-        	Bullet bullet = bullets.get(i);
+
+		// 循环画子弹
+		for(int i = 0;i<bullets.size();i++) {
+			Bullet bullet = bullets.get(i);
 			bullet.draw(g);
 			if(enemys.size()>0) {
-			bullet.hitMonsters(enemys);
-			bullet.hitMonsters(mouses);
-          }
-		bullet.hitMonsters(booss);
-        }
-        g.drawString("当前子弹的数量："+bullets.size(), 10, 40);
-        g.drawString("当前敌机的数量："+enemys.size(),10,70);
-        g.drawString("当前爆炸的数量"+booms.size(), 10, 100);
-        g.drawString("当前我方的数量"+mouses.size(), 10, 130);
-        g.drawString("当前道具的数量"+props.size(), 10, 160);
-        
-        //循环画敌人
-        for(int i = 0;i<enemys.size();i++) {
-        	enemys.get(i).draw(g);
-        }
-        
-        //循环画爆炸
-        for(int i = 0;i<booms.size();i++) {
-        	if(booms.get(i).isLive()== true) {
-        	booms.get(i).draw(g);
-        	}
-        }
-        
-        //循环画道具
-        for(int i = 0;i<props.size();i++) {
-            props.get(i).draw(g);	
-        } 
-        
-        //循环画boos
-        if(enemys.size()==0){ 
-            for(int i = 0;i<booss.size();i++) {
-            	booss.get(i).draw(g);
-            }	
-        }
+				bullet.hitMonsters(enemys);
+				bullet.hitMonsters(mouses);
+			} 
+			bullet.hitMonsters(booss);
+			bullet.hitMonster(mouse);
+		}
+		
+		g.drawString("当前子弹的数量："+bullets.size(), 10, 40);
+		g.drawString("当前敌机的数量："+enemys.size(),10,70);
+		g.drawString("当前爆炸的数量"+booms.size(), 10, 100);
+		g.drawString("当前我方的数量"+mouses.size(), 10, 130);
+		g.drawString("当前道具的数量"+props.size(), 10, 160);
+
+
+		
+		// 循环画敌人
+		for(int i = 0;i<enemys.size();i++) {
+			enemys.get(i).draw(g);
+		}
+
+		// 循环画爆炸
+		for(int i = 0;i<booms.size();i++) {
+			if(booms.get(i).isLive()== true) {
+				booms.get(i).draw(g);
+			}
+		}
+
+		// 循环画道具
+		for(int i = 0;i<props.size();i++) {
+			props.get(i).draw(g);	
+		} 
+
+		// 循环画boos
+		//if(enemys.size()==0){ 
+			for(int i = 0;i<booss.size();i++) {
+				booss.get(i).draw(g);
+			}	
+		//}
+		// 不朽
+//		if(mouses.size()==0) {
+//			mouses.add(mouse);
+//			mouse.draw(g);
+//		}
 	}
-	
-	
-	//循环调用paint（）方法
+
+
+	// 循环调用paint（）方法
 	class Thread1 extends Thread{
 		public void run() {
 			while (true) {

@@ -10,10 +10,18 @@ import com.client.GameClient;
 import com.constant.Constant;
 import com.util.GetImageUtil;
 
+/**
+* @ClassName: Boos
+* @Description: boss
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:35:17
+*
+*/
 public class Boos extends Mouse implements ActionAble {
 	private GameClient gc;
 	private int speed = 2;
 	private boolean up;
+	
 	public Boos() {
 		
 	}
@@ -22,7 +30,7 @@ public class Boos extends Mouse implements ActionAble {
 		this.y = y;
 		this.gc = gc;
 		this.IsGood = IsGood;
-		this.blood = 25;
+		this.blood = 40;
 	}
     //定义一个数组图片
 	private static Image[] images = new Image[7];
@@ -55,7 +63,8 @@ public class Boos extends Mouse implements ActionAble {
 	    }
 	}
 	Random random = new Random();
-    int count = 0; 
+    
+	int count = 0; 
     public void draw(Graphics g) {
         if(count>6) {
         	count = 0;

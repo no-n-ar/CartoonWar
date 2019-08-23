@@ -10,6 +10,13 @@ import com.action.ActionAble;
 import com.client.GameClient;
 import com.util.GetImageUtil;
 
+/**
+* @ClassName: Boom
+* @Description: 爆炸
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:35:07
+*
+*/
 public class Boom extends Gameobj implements ActionAble {
 	private static Image[] imgs = {
 			GetImageUtil.getImg("com/img/Boom/e1.png"),

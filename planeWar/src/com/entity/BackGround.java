@@ -2,9 +2,18 @@ package com.entity;
 
 import java.awt.Graphics;
 
+import javax.swing.RepaintManager;
+
 import com.action.ActionAble;
 import com.util.GetImageUtil;
 
+/**
+* @ClassName: BackGround
+* @Description: 背景
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:34:55
+*
+*/
 public class BackGround extends Gameobj implements ActionAble{
 	private int speed;
     public BackGround() {
@@ -20,7 +29,6 @@ public class BackGround extends Gameobj implements ActionAble{
 	@Override
 	public void move() {
 		x -= speed;
-		
 	}
 
 	@Override

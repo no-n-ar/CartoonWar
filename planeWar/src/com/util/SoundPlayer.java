@@ -1,17 +1,18 @@
 package com.util;
-/**
-* @ClassName: 播放背景音乐
-* @Description: TODO(这里用一句话描述这个类的作用)
-* @author guanguoliang
-* @date 2019年8月20日 下午6:56:24
-*
-*/
+
 import java.io.InputStream;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 
+/**
+* @ClassName: SoundPlayer
+* @Description: 背景音乐
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:32:45
+*
+*/
 public class SoundPlayer extends Thread {
 	private String mp3Name;
     public SoundPlayer() {

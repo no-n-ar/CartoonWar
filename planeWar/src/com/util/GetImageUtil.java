@@ -7,6 +7,13 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+/**
+* @ClassName: GetImageUtil
+* @Description: 读图方法
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:33:23
+*
+*/
 public class GetImageUtil {
     public static Image getImg(String imgName) {
     	URL resource = GetImageUtil.class.getClassLoader().getResource(imgName);

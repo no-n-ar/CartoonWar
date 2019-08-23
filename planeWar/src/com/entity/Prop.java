@@ -10,10 +10,10 @@ import com.constant.Constant;
 import com.util.GetImageUtil;
 
 /**
-* @ClassName: 工具类
-* @Description: TODO(这里用一句话描述这个类的作用)
-* @author guanguoliang
-* @date 2019年8月20日 下午3:20:46
+* @ClassName: Prop
+* @Description: 道具类
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:36:38
 *
 */
 public class Prop extends Gameobj implements ActionAble {

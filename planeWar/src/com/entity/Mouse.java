@@ -12,29 +12,37 @@ import com.constant.Constant;
 import com.util.GetImageUtil;
 import com.util.singlePlay;
 
+/**
+* @ClassName: Mouse
+* @Description: 飞机类
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:34:38
+*
+*/
 public class Mouse extends Gameobj implements ActionAble{
 	singlePlay play = new singlePlay();
     private int speed;
     private boolean left,right,up,down;
     private GameClient gc;
     public boolean IsGood;
-    //添加飞机子弹等级
+    // 添加飞机子弹等级
     public int Bulletlevel = 1;
-    //加血值
+    // 加血值
     public int blood;
 	public Mouse() {
 	   
    }
+	
    public Mouse(int x,int y,String imgName,GameClient gc,boolean IsGood) {
 	  this.x = x;
 	  this.y = y;
 	  this.img = GetImageUtil.getImg(imgName);
-	  this.speed = 10;
+	  this.speed = 30;
 	  this.gc = gc;
 	  this.IsGood = IsGood;
-	  this.blood = 100;
+	  this.blood = 200;
    }
-    //移动方法
+    // 移动方法
     public void move() {
        if(left) {
     	 x -= speed;  
@@ -50,13 +58,15 @@ public class Mouse extends Gameobj implements ActionAble{
        }
        outOfBound();
     }
-    //画飞机
+    
+    // 画飞机
     public void draw(Graphics g) {
     g.drawImage(img, x, y,null);
     move();
-    g.drawString("飞机当前血量为"+blood,gc.mouses.get(0).x+50,gc.mouses.get(0).y);
+    g.drawString("飞机当前血量为"+blood,gc.mouses.get(0).x-8,gc.mouses.get(0).y-15);
     }
-    //处理边界问题
+    
+    // 处理边界问题
     public void outOfBound() {
     	if(y<=30) {
     		y = 30;
@@ -71,7 +81,8 @@ public class Mouse extends Gameobj implements ActionAble{
     		x = Constant.GAMEWIDTH-img.getWidth(null);
     	}
     }
-    //键盘按下
+    
+    // 键盘按下
     public void keyPressed(KeyEvent e) {
     	switch(e.getKeyCode()) {
     	case KeyEvent.VK_LEFT:
@@ -93,7 +104,8 @@ public class Mouse extends Gameobj implements ActionAble{
     		break;
     	}
     }
-    //键盘释放
+    
+    // 键盘释放
     public void keyReleased(KeyEvent e) {
     	switch(e.getKeyCode()) {
     	case KeyEvent.VK_LEFT:
@@ -112,30 +124,37 @@ public class Mouse extends Gameobj implements ActionAble{
     		break;
     	}
     }
-    //老鼠发射子弹
+    
+    // 老鼠发射子弹
     public void fire() {
     	play.play("com/sound/SOUND_BOOSTER_COIN.mp3");
     	Bullet bullet = new Bullet(x+this.img.getWidth(null),y+this.img.getHeight(null)/2 -18,"com/img/bullet/BULLET_CHAR_ANNA_0"+Bulletlevel+".png",gc,true);
-    	gc.bullets.add(bullet);
+    	
+    	if(gc.mouses.size()!=0) {
+    		gc.bullets.add(bullet);
+    	}
     }
-    //获取到敌人的矩形
+    
+    // 获取到敌人的矩形
   	public Rectangle getRec() {
   		return new Rectangle(x,y,this.img.getWidth(null),this.img.getHeight(null));
   	}
-  	//检测我方角色碰到道具
+  	
+  	// 检测我方角色碰到道具
   	public void containItem(Prop prop) {
   		if(this.getRec().intersects(prop.getRect())) {
-  			//移除道具
+  			// 移除道具
   		    gc.props.remove(prop);
-  		    //更改子弹等级
-  		    if(this.Bulletlevel>7) {
-  		        this.Bulletlevel = 7;
+  		    // 更改子弹等级
+  		    if(this.Bulletlevel>=6) {
+  		        this.Bulletlevel = 6;
   		    }else {
   		    	this.Bulletlevel += 1; 
   		    }
   		}
   	}
-  	//检测我方角色碰到多个道具
+  	
+  	// 检测我方角色碰到多个道具
   	public void containItem(List<Prop> props) {
   		if(props == null) {
   			return;

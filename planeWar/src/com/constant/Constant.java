@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+* @ClassName: Constant
+* @Description: 窗口大小
+* @author Crimson_wdc
+* @date 2019年8月23日 下午3:37:39
+*
+*/
 public class Constant {
 	public static Properties prop = new Properties();
 	static Integer Game_WIDTH;
